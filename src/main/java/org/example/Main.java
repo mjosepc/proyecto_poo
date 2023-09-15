@@ -1,4 +1,3 @@
-
 package org.example;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,17 +6,13 @@ import java.util.Scanner;
 public class Main {
     private static Map<String, Producto> inventario = new HashMap<>();
     private static Scanner scanner = new Scanner(System.in);
-
     public static void main(String[] args) {
-        while (true) {
-            System.out.println("Bienvenido a la aplicación de gestión de inventario");
-            System.out.println("1. Registrar un producto");
-            System.out.println("2. Listar productos");
-            System.out.println("3. Salir");
-            System.out.print("Seleccione una opción: ");
 
-            int opcion = scanner.nextInt();
-            scanner.nextLine(); // Consumir la nueva línea
+        int opcion;
+
+        do {
+            Menu();
+            opcion = scanner.nextInt();
 
             switch (opcion) {
                 case 1:
@@ -32,23 +27,32 @@ public class Main {
                 default:
                     System.out.println("Opción no válida. Intente de nuevo.");
             }
-        }
+        } while (opcion != 3);
+        scanner.close();
     }
+    public static void Menu(){
 
+        System.out.println("Bienvenido a la aplicación de gestión de inventario");
+        System.out.println("1. Registrar un producto");
+        System.out.println("2. Listar productos");
+        System.out.println("3. Salir");
+        System.out.print("Seleccione una opción: ");
+    }
     private static void registrarProducto() {
+        scanner.nextLine();
         System.out.println("Ingrese los datos del producto:");
-        System.out.print("Nombre: ");
+        System.out.println("Nombre: ");
         String nombre = scanner.nextLine();
-        System.out.print("Descripción (opcional): ");
+        System.out.println("Descripción (opcional): ");
         String descripcion = scanner.nextLine();
-        System.out.print("Precio: ");
+        System.out.println("Precio: ");
         double precio = scanner.nextDouble();
-        scanner.nextLine(); // Consumir la nueva línea
-        System.out.print("ID (código de barras): ");
+        scanner.nextLine();
+        System.out.println("ID (código de barras): ");
         String codigoBarras = scanner.nextLine();
-        System.out.print("Stock: ");
+        System.out.println("Stock: ");
         int stock = scanner.nextInt();
-        scanner.nextLine(); // Consumir la nueva línea
+        scanner.nextLine();
 
         Producto producto = new Producto(nombre, descripcion, precio, codigoBarras, stock);
         inventario.put(codigoBarras, producto);
